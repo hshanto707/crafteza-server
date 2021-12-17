@@ -7,6 +7,9 @@ require('dotenv').config()
 const app = express();
 const port = process.env.PORT || 5000;
 
+app.use(express.json());
+app.use(cors());
+
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.swoyo.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -36,9 +39,9 @@ run().catch(console.dir);
 
 
 app.get('/', (req, res) => {
-    res.send('Crafteza Server Is Working Perfectly!')
+  res.send('Crafteza Server Is Working Perfectly!')
 })
 
 app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
+  console.log(`Example app listening at port: ${port}`)
 })
