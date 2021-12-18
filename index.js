@@ -38,6 +38,30 @@ async function run() {
       res.json(result);
     });
 
+    // ADD DATA TO CART
+
+    app.post('/cart', async (req, res) => {
+      const product = req.body;
+      const result = await cartCollection.insertOne(product);
+      res.json(result);
+    })
+
+    // GET USER'S CART DATA
+
+    app.get('./cart/:uid', async (req, res) => {
+      const uid = req.params.uid;
+      const query = { uid: uid }
+      const result = await cartCollection.find(query).toArray();
+    })
+
+    // DELETE DATA FROM CART
+
+    // GET USER'S WISH LIST DATA
+
+    // ADD DATA TO WISH LIST
+
+    // DELETE DATA FROM WISH LIST
+
   }
   finally {
     // await client.close()
